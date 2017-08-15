@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Zero工程师端</title>
+    <link rel="stylesheet" type="text/css" href="css/zero.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+</head>
+<body>
+<div id="zero">
+<div class="row">
+	<div class="zero_left clearfix">
+		<div class="zero_left_head">
+		    <div class="engineer_state">
+		    	<div class="state_text"><div class="dot_green dot_a1"></div>在线</div>
+		    	<div class="state_text"><div class="dot_orange dot_a1"></div>忙碌</div>
+		    	<div class="state_text"><div class="dot_red dot_a1"></div>离开</div>
+		    </div>
+			<div class="img avatar_d avatar"></div>
+			<div class="engineer_info">
+				<div class="engineer_name">{{test.engineer.name}}<div :class="dot(test.engineer.state)"></div></div>
+				<div class="engineer_num">
+				    <div class="info_1">
+				    	<div class="img icon_finish"></div>
+				    	<div class="info_num">{{test.engineer.ok}}</div>
+				    </div>
+				    <div class="info_2">
+				    	<div class="img icon_alarm"></div>
+				    	<div class="info_num">{{test.engineer.alarm}}</div>
+				    </div>			
+				</div>
+			</div>
+			<div class="left_btn_add img btn_addchat po " data-toggle="modal" data-target="#mylink"></div>
+		</div>
+		<div class="zero_left_content clearfix ">
+			<div class="zero_side">
+				<div class="zero_side_top">
+					<div class="side_btn">
+						<div class="img icon_new"></div>
+						<div class="side_btn_num">最近</div>
+					</div>
+					<div class="side_btn">
+						<div class="img icon_history"></div>
+						<div class="side_btn_num side_hover">历史</div>
+						<div class="side_btn_dot"></div>
+					</div>
+					<div class="side_btn">
+						<div class="img icon_team"></div>
+						<div class="side_btn_num">团队</div>
+					</div>
+				</div>
+				<div class="zero_side_bottom">
+					<div class="side_bto_btn">
+						<div class="icon_cicle">E</div>
+						<div class="side_btn_num">ESD</div>
+					</div>
+					<div class="side_bto_btn">
+						<div class="icon_cicle">知</div>
+						<div class="side_btn_num">知识</div>
+					</div>
+					<div class="side_bto_btn">
+						<div class="icon_cicle">官</div>
+						<div class="side_btn_num">官网</div>
+					</div>
+				</div>
+			</div>
+			<div class="zero_user_list">
+			  <div class="list_all">
+			    <div :class="flag(user.flag,user.choosed)" v-for="(user,index) in test.alluser" @click="choosed(index)">
+				    <div class="del_user"><div class="img btn_close1 btn_c_1"></div></div>
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name"><div :class="report(user.report)"></div>{{user.name}}<div :class="dot(user.state)"></div></div>
+						<div class="dialog_line">{{shot(index)}}</div>
+					</div>
+				</div>
+			<!-- 	<div class="user_info flag_left_orange">
+				    <div class="del_user"><div class="img btn_close1 btn_c_1"></div></div>
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">米小米<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info">
+				    <div class="del_user"><div class="img btn_close1 btn_c_1"></div></div>
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info">
+				    <div class="del_user"><div class="img btn_close1 btn_c_1"></div></div>
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info flag_left_orange">
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_red"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info flag_left_green">
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info">
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_orange"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info flag_left_red">
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name"><div class="img icon_report user_rep"></div>李小晨<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div>
+				<div class="user_info">
+					<div class="img avatar_d user_avatar"></div>
+					<div class="user_other">
+						<div class="user_name">李小晨<div class="dot_green"></div></div>
+						<div class="dialog_line">文件还在下载呢</div>
+					</div>
+				</div> -->
+			  </div>
+			</div>
+		</div>
+	</div>
+	<div class="zero_content">
+		<div class="zero_content_head">
+			<div class="zero_dialog_info">
+				<div class="img avatar_d user_avatar"></div>
+			    <div class="user_other">
+						<div class="user_name">{{onchat.name}}<div :class="dot(onchat.state)"></div></div>
+						<div class="dialog_line">{{onchat.from}}</div>
+				</div>
+			</div>
+			<div class="zero_content_btn">
+			    <div class="flag_choose">
+			    	<div class="img icon_flag flag_ch"></div>
+			    	<div class="img icon_flag2 flag_ch"></div>
+			    	<div class="img icon_flag3 flag_ch"></div>
+			    	<div class="img icon_flag4 flag_ch"></div>
+			    </div>
+				<div class="content_btn flag_c">
+					<div class="img icon_flag content_btn_icon"></div>
+					<div class="content_btn_text ho_1">标记</div>
+				</div>
+				<div class="content_btn report" data-toggle="modal" data-target="#rep">
+					<div class="img icon_report content_btn_icon"></div>
+					<div class="content_btn_text ho_2">举报</div>
+				</div>
+				<div class="content_btn"  data-toggle="modal" data-target="#transfer">
+					<div class="img icon_transfer content_btn_icon"></div>
+					<div class="content_btn_text ho_3">转接</div>
+				</div>
+			</div>
+		</div>
+		<div class="dialog_content">
+		        <div class="dialog_pop clearfix" v-for="(chat,index) in onchat.dialog">
+		            <div v-if="chat.tag == 'text'">
+		            	<div  :class="belong(chat.belong)">{{chat.content}}</div>
+		            </div>
+				</div>
+				<!-- <div class="dialog_time">上午 10:00</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">夸张只因我很怕，似木头似石头的话得到注意吗？其实怕被忘记，至放大来演吧，很不安怎去优雅，世上还赞颂沉默吗？不够爆炸</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_2">你好</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_2">我想见的笑脸只有怀念，不懂怎去再聊天，似等了一百年忽已明白，即使再见面，成熟地表演，不如不见</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">你怎么一言不合就尬歌</div>
+				</div>
+				<div class="dialog_info_on">
+				  <div class="dialog_info_warn">
+				 	<div class="img icon_info icon_info_img"></div>
+					<div class="dialog_info_text">连接已断开</div>
+				  </div>
+				</div>
+				<div class="dialog_info_on">
+				  <div class="dialog_info_ok">
+				 	<div class="img icon_ok icon_info_img"></div>
+					<div class="dialog_info_text">连接已恢复</div>
+				  </div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">接着尬歌？</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<img src="img/img_test/a.jpg" class="dialog_img_1">
+				</div>
+				<div class="dialog_pop clearfix">
+					<img src="img/img_test/a.jpg" class="dialog_img_2">
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_2">谁人又相信一世一生，这肤浅对白，我只得千语万言，放在你心，比渴望，地老天荒，更简单未算罕有</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_2">谁辜负过自己，说不上可惜，谁被世道放逐，身不由己，谁曾朝不保夕，才为幸福而卖力，才舍得面对镜子，说我可以，对重遇的人说，原来你也在这里。——《从何说起》</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">他能够让我感动，谁管他红不红，能够生存就有恃无恐，苦痛说了没人懂，我想什么没人懂，没有人歌颂，总有人被感动</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">接着尬歌？</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_1">接着尬歌？</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_rate">
+						<div class="img avatar_d rate_avatar"></div>
+						<div class="rate_text">请您为我的服务做出评价非常感谢</div>
+					</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_file clearfix">
+						<div class="img icon_file file_pop"></div>
+						<div class="rate_text">驱动程序001.zip</div>
+						<div class="file_info">100K</div>
+						<div class="file_down clearfix">下载</div><div class="img icon_download file_d"></div>
+					</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_file_u clearfix">
+						<div class="img icon_file file_pop"></div>
+						<div class="rate_text">驱动程序001.zip</div>
+						<div class="file_info">100K</div>
+						<div class="file_down clearfix">下载</div><div class="img icon_download file_d"></div>
+					</div>
+				</div>
+				<div class="dialog_pop clearfix">
+					<div class="dialog_file_a clearfix">
+						<div class="img icon_file_no file_pop"></div>
+						<div class="rate_text">驱动程序001.zip</div>
+						<div class="file_info">上传失败</div>
+						<div class="file_down clearfix">重传</div><div class="img icon_again file_d"></div>
+					</div>
+				</div> -->
+		</div>
+		<div class="zero_content_bottom">
+			<div class="dialog_choose">
+				<div class="dialog_c">
+					<div class="img icon_face dialog_c_1"></div>
+					<div class="img icon_pic dialog_c_1"></div>
+					<div class="img2 icon_file dialog_c_1"></div>
+					<div class="img icon_flower dialog_c_1"></div>
+					<div class="btn_zhi po"><div class="btn_zhi_text img icon_smart"></div></div>
+				</div>
+			</div>
+			<div class="dialog_text">
+				<textarea class="dialog_text_in" v-model='newchat.content' v-on:keyup.enter="addchat"></textarea>
+			</div>
+			<div class="dialog_info">
+				<div class="dialog_info_1">
+					<div class="dialog_info_2">开始时间：16:17</div>
+					<div class="dialog_info_2">已经服务：1:32</div>
+				</div>
+				<div class="dialog_send po" @click="addchat" >
+					 发送
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="zero_right">
+		<div class="right_head">
+		   <div class="right_head_tab tab_choose">CRM</div>
+		   <div class="right_head_tab ml5">常用话术</div>
+		   <div class="right_head_tab ml5">知识库</div>	
+		</div>
+		<div class="right_content">
+			
+		</div>
+	</div>
+</div>
+<div class="modal fade" id="mylink" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog mylink_1" role="document">
+    <div class="modal-content mylink_m">
+      <div class="img btn_close2 close_2 po" data-dismiss="modal"></div>
+      <div class="img icon_link link_icon"></div><div class="link_text">我的链接</div>
+      <div class="link_content">http://www.zero.com/lenovo/engineer/A23282</div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="rep" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog mylink_1" role="document">
+    <div class="modal-content mylink_m">
+      <div class="img btn_close2 close_2 po" data-dismiss="modal"></div>
+      <div class="img icon_report link_icon"></div><div class="link_text">举报</div>
+      <div class="report_content">
+      <textarea class="dialog_text_in" placeholder="举报理由"></textarea>
+      <div class="btn_zero report_btn">
+      	举报
+      </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="modal fade" id="transfer" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog mylink_1" role="document">
+    <div class="modal-content mylink_m clearfix">
+      <div class="img btn_close2 close_2 po" data-dismiss="modal"></div>
+      <div class="img icon_transfer link_icon"></div><div class="link_text">转接</div>
+      <div class="transfer_content">
+      <textarea class="dialog_text_in_1" placeholder="在这里输入..."></textarea>
+      </div>
+      <div class="btn_zero transfer_btn ">
+      	转接
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<script src="js/jquery-2.1.1.js"></script>
+<script src="js/bootstrap.js"></script>
+<script src="js/vue.min.js"></script>
+<script src="js/zero.js"></script>
+</body>
+</html>
